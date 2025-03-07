@@ -1,4 +1,4 @@
-<head>
+<!-- <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ .Title }}</title>
@@ -19,5 +19,523 @@
   <footer>
     {{ partial "footer.html" . }}
   </footer>
+</body>
+</html>
+ -->
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="小艾博客 - 知识是进步的阶梯，争取每天都有知识点更新">
+  <title>小艾博客 - 记录分享</title>
+  <!-- Use local CSS file instead of CDN -->
+  {{ partialCached "head/css.html" . }}
+  <style>
+    /* Custom styles that were previously inline */
+    .text-shadow {
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+    .card-hover {
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card-hover:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    }
+    .dropdown-menu {
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+    }
+    .dropdown:hover .dropdown-menu {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-800 antialiased">
+  <!-- Header -->
+  <header id="pageHeader" class="border-gray-100 sticky top-0 bg-white/95 backdrop-blur-sm z-10">
+    <div class="container mx-auto px-4 py-3">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="#" class="flex items-center group">
+            <div class="h-6 w-6 rounded-full bg-blue-500 mr-2 group-hover:scale-110 transition-transform"></div>
+            <span class="font-medium group-hover:text-blue-500 transition-colors">小艾博客</span>
+          </a>
+        </div>
+        
+        <div class="relative hidden sm:block">
+          <input
+            type="text"
+            placeholder="Search"
+            aria-label="搜索"
+            class="pl-8 pr-12 py-1.5 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-64 transition-all"
+          />
+          <div class="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <div class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs bg-gray-100 px-1.5 py-0.5 rounded">
+            Ctrl+K
+          </div>
+        </div>
+        
+        <nav class="hidden md:flex items-center space-x-4">
+          <!-- Home -->
+          <a href="#" class="text-sm hover:text-pink-500 transition-colors font-medium px-2 py-2">首页</a>
+          
+          <!-- Navigation Dropdown -->
+          <div class="relative dropdown group">
+            <button class="text-sm hover:text-pink-500 transition-colors px-2 py-2 flex items-center">
+              导航
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute left-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-20">
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">常用工具</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">编程资源</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">学习路径</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">知识点总结</a>
+            </div>
+          </div>
+          
+          <!-- Life Diary Dropdown -->
+          <div class="relative dropdown group">
+            <button class="text-sm hover:text-pink-500 transition-colors px-2 py-2 flex items-center">
+              生活日记
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute left-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-20">
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">旅行记录</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">美食分享</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">读书笔记</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">日常随笔</a>
+            </div>
+          </div>
+          
+          <!-- Tech Sharing Dropdown -->
+          <div class="relative dropdown group">
+            <button class="text-sm hover:text-pink-500 transition-colors px-2 py-2 flex items-center">
+              技术分享
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute left-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-20">
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">CTF竞赛</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">漏洞分析</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">安全工具</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">编程技巧</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">前端开发</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">后端开发</a>
+            </div>
+          </div>
+          
+          <!-- SDR Instructions -->
+          <a href="#" class="text-sm hover:text-pink-500 transition-colors px-2 py-2">SDR读取机使用说明</a>
+          
+          <!-- Tools Dropdown -->
+          <div class="relative dropdown group">
+            <button class="text-sm hover:text-pink-500 transition-colors px-2 py-2 flex items-center">
+              工具
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute left-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-20">
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">在线工具</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">代码格式化</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">加密解密</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">图片处理</a>
+            </div>
+          </div>
+          
+          <!-- Games Dropdown -->
+          <div class="relative dropdown group">
+            <button class="text-sm hover:text-pink-500 transition-colors px-2 py-2 flex items-center">
+              小游戏
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="dropdown-menu absolute left-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-20">
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">贪吃蛇</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">俄罗斯方块</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">2048</a>
+              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-pink-500">扫雷</a>
+            </div>
+          </div>
+          
+          <!-- About -->
+          <a href="#" class="text-sm hover:text-pink-500 transition-colors px-2 py-2">关于</a>
+        </nav>
+        
+        <div class="flex items-center">
+          <button id="mobileMenuButton" class="md:hidden text-gray-500 focus:outline-none" aria-label="菜单">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <a href="#" class="text-gray-700 hover:text-gray-900 ml-4" aria-label="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu (hidden by default) -->
+  <div id="mobileMenu" class="hidden bg-white shadow-lg rounded-b-lg mx-4 md:hidden animate-fade-in">
+    <nav class="py-2">
+      <a href="#" class="block px-4 py-2 hover:bg-gray-50">首页</a>
+      
+      <!-- Mobile Navigation Dropdown -->
+      <div class="mobile-dropdown">
+        <button class="w-full text-left px-4 py-2 hover:bg-gray-50 flex justify-between items-center">
+          导航
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mobile-dropdown-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+        <div class="mobile-dropdown-menu hidden pl-4">
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">常用工具</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">编程资源</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">学习路径</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">知识点总结</a>
+        </div>
+      </div>
+      
+      <!-- Mobile Life Diary Dropdown -->
+      <div class="mobile-dropdown">
+        <button class="w-full text-left px-4 py-2 hover:bg-gray-50 flex justify-between items-center">
+          生活日记
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mobile-dropdown-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+        <div class="mobile-dropdown-menu hidden pl-4">
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">旅行记录</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">美食分享</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">读书笔记</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">日常随笔</a>
+        </div>
+      </div>
+      
+      <!-- Mobile Tech Sharing Dropdown -->
+      <div class="mobile-dropdown">
+        <button class="w-full text-left px-4 py-2 hover:bg-gray-50 flex justify-between items-center">
+          技术分享
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mobile-dropdown-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+        <div class="mobile-dropdown-menu hidden pl-4">
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">CTF竞赛</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">漏洞分析</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">安全工具</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">编程技巧</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">前端开发</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">后端开发</a>
+        </div>
+      </div>
+      
+      <a href="#" class="block px-4 py-2 hover:bg-gray-50">SDR读取机使用说明</a>
+      
+      <!-- Mobile Tools Dropdown -->
+      <div class="mobile-dropdown">
+        <button class="w-full text-left px-4 py-2 hover:bg-gray-50 flex justify-between items-center">
+          工具
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mobile-dropdown-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+        <div class="mobile-dropdown-menu hidden pl-4">
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">在线工具</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">代码格式化</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">加密解密</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">图片处理</a>
+        </div>
+      </div>
+      
+      <!-- Mobile Games Dropdown -->
+      <div class="mobile-dropdown">
+        <button class="w-full text-left px-4 py-2 hover:bg-gray-50 flex justify-between items-center">
+          小游戏
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mobile-dropdown-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+        <div class="mobile-dropdown-menu hidden pl-4">
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">贪吃蛇</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">俄罗斯方块</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">2048</a>
+          <a href="#" class="block px-4 py-2 hover:bg-gray-50 text-sm">扫雷</a>
+        </div>
+      </div>
+      
+      <a href="#" class="block px-4 py-2 hover:bg-gray-50">关于</a>
+    </nav>
+  </div>
+
+  <main class="container mx-auto px-4 py-8">
+    <!-- Hero Section -->
+    <section class="py-12 flex flex-col md:flex-row items-center justify-between">
+      <div class="md:w-2/3">
+        <h1 class="text-4xl md:text-5xl font-bold mb-2 text-shadow">
+          <span class="text-orange-500">小艾</span>
+          <span class="text-gray-800">记录分享</span>
+        </h1>
+        <p class="text-gray-600 mb-8 text-lg">知识是进步的阶梯，争取每天都有知识点更新</p>
+        
+        <div class="flex flex-wrap gap-2">
+          <a href="#" class="px-5 py-2.5 bg-pink-500 text-white rounded-full text-sm font-medium hover:bg-pink-600 transition-colors shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2">
+            导航
+          </a>
+          <a href="#" class="px-5 py-2.5 bg-white border border-gray-200 rounded-full text-sm font-medium hover:bg-gray-50 transition-colors shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2">
+            生活日记
+          </a>
+          <a href="#" class="px-5 py-2.5 bg-pink-500 text-white rounded-full text-sm font-medium hover:bg-pink-600 transition-colors shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2">
+            技术分享
+          </a>
+          <a href="#" class="px-5 py-2.5 bg-white border border-gray-200 rounded-full text-sm font-medium hover:bg-gray-50 transition-colors shadow-sm hover:shadow focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-offset-2">
+            关于本站
+          </a>
+        </div>
+      </div>
+      
+      <div class="mt-8 md:mt-0">
+        <div class="w-48 h-48 bg-blue-500 rounded-full overflow-hidden border-8 border-white shadow-lg transform transition-transform hover:scale-105">
+          <!-- Profile image placeholder -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Category Cards -->
+    <section class="py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Navigation Card -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-sm card-hover">
+          <div class="w-12 h-12 flex items-center justify-center bg-white rounded-lg mb-4 shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-2">导航</h3>
+          <p class="text-gray-600 text-sm mb-4">记录一些常用的工具网站，和一些知识点。</p>
+          <a href="#" class="text-pink-500 text-sm flex items-center hover:text-pink-600 group">
+            导航 
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Life Diary Card -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-sm card-hover">
+          <div class="w-12 h-12 flex items-center justify-center bg-white rounded-lg mb-4 shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-2">生活日记</h3>
+          <p class="text-gray-600 text-sm mb-4">随心记录生活</p>
+          <a href="#" class="text-pink-500 text-sm flex items-center hover:text-pink-600 group">
+            生活日记
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- Tech Sharing Card -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-sm card-hover">
+          <div class="w-12 h-12 flex items-center justify-center bg-white rounded-lg mb-4 shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-2">技术分享</h3>
+          <p class="text-gray-600 text-sm mb-4">分享一些技术类文章，比如CTF，漏洞分析，漏洞复现等。</p>
+          <a href="#" class="text-pink-500 text-sm flex items-center hover:text-pink-600 group">
+            技术分享
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+
+        <!-- About Site Card -->
+        <div class="bg-gray-50 p-6 rounded-lg shadow-sm card-hover">
+          <div class="w-12 h-12 flex items-center justify-center bg-white rounded-lg mb-4 shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-2">关于本站</h3>
+          <p class="text-gray-600 text-sm mb-4">做个记录分享地方。</p>
+          <a href="#" class="text-pink-500 text-sm flex items-center hover:text-pink-600 group">
+            关于本站
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Friend Links -->
+    <section class="py-12">
+      <h2 class="text-2xl font-bold mb-6 flex items-center">
+        <span>友情链接</span>
+        <div class="h-1 bg-gradient-to-r from-pink-500 to-transparent flex-grow ml-4 rounded-full"></div>
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Friend Link 1 -->
+        <a href="#" class="block bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-colors shadow-sm card-hover">
+          <div class="flex items-start">
+            <div class="w-10 h-10 flex items-center justify-center bg-white rounded-lg mr-3 text-lg shadow-sm">
+              <span role="img" aria-label="Triangle">🔺</span>
+            </div>
+            <div>
+              <h3 class="font-medium mb-1">雨欣♿</h3>
+              <p class="text-gray-600 text-xs line-clamp-2">雨欣♿ 福州|厦泉|快递|漏洞测试|专注于安全|数据泄露|隐私保护|poc|exp|漏洞挖掘</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Friend Link 2 -->
+        <a href="#" class="block bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-colors shadow-sm card-hover">
+          <div class="flex items-start">
+            <div class="w-10 h-10 flex items-center justify-center bg-white rounded-lg mr-3 text-lg shadow-sm">
+              <span role="img" aria-label="Magnifying Glass">🔍</span>
+            </div>
+            <div>
+              <h3 class="font-medium mb-1">Alpha's blog</h3>
+              <p class="text-gray-600 text-xs line-clamp-2">alpha@blog, 记录生活以及个人学习过程! ----I believe I will have a bright future</p>
+            </div>
+          </div>
+        </a>
+
+        <!-- Friend Link 3 -->
+        <a href="#" class="block bg-gray-50 p-4 rounded-lg hover:bg-gray-100 transition-colors shadow-sm card-hover">
+          <div class="flex items-start">
+            <div class="w-10 h-10 flex items-center justify-center bg-white rounded-lg mr-3 text-lg shadow-sm">
+              <span role="img" aria-label="Bell">🔔</span>
+            </div>
+            <div>
+              <h3 class="font-medium mb-1">去叶博网</h3>
+              <p class="text-gray-600 text-xs line-clamp-2">Pi范及Bee示等手机的扩展资讯, 区块链, 各类编程和博客, 博客, 技术和资源分享</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Apply for Friend Link Section -->
+    <section class="py-4 bg-gray-50 rounded-lg px-4 mb-12 shadow-sm">
+      <details class="cursor-pointer group">
+        <summary class="font-medium py-2 flex items-center">
+          <span>申请友链</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </summary>
+        <div class="py-4 text-sm text-gray-600 border-t mt-2">
+          <p class="mb-2">如果您想申请友链，请提供以下信息：</p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>网站名称</li>
+            <li>网站描述（简短）</li>
+            <li>网站图标或Logo</li>
+            <li>网站链接</li>
+          </ul>
+          <div class="mt-4">
+            <a href="mailto:contact@example.com" class="inline-flex items-center text-pink-500 hover:text-pink-600">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              联系我们
+            </a>
+          </div>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer class="bg-gray-50 border-t border-gray-100 py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0">
+          <div class="flex items-center">
+            <div class="h-6 w-6 rounded-full bg-blue-500 mr-2"></div>
+            <span class="font-medium">小艾博客</span>
+          </div>
+          <p class="text-sm text-gray-500 mt-2">知识是进步的阶梯，争取每天都有知识点更新</p>
+        </div>
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-500 hover:text-pink-500 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+          <a href="#" class="text-gray-500 hover:text-pink-500 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+            </svg>
+          </a>
+          <a href="#" class="text-gray-500 hover:text-pink-500 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobileMenuButton').addEventListener('click', function() {
+      const mobileMenu = document.getElementById('mobileMenu');
+      mobileMenu.classList.toggle('hidden');
+    });
+    
+    // Mobile dropdowns
+    document.querySelectorAll('.mobile-dropdown button').forEach(button => {
+      button.addEventListener('click', function() {
+        const menu = this.nextElementSibling;
+        const icon = this.querySelector('.mobile-dropdown-icon');
+        
+        menu.classList.toggle('hidden');
+        if (!menu.classList.contains('hidden')) {
+          icon.style.transform = 'rotate(90deg)';
+        } else {
+          icon.style.transform = 'rotate(0)';
+        }
+      });
+    });
+    
+    // 顶部导航栏的阴影
+    document.addEventListener('scroll', () => {
+    const header = document.getElementById('pageHeader');
+    if (window.scrollY > 0) {
+      header.classList.add('shadow-sm');
+    } else {
+      header.classList.remove('shadow-sm');
+    }
+  });
+  </script>
 </body>
 </html>
